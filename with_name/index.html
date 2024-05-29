@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Are Multimodal Models Robust to Image and Text Perturbations?">
+    <meta name="author"
+          content="Jielin Qiu, Yi Zhu, Xingjian Shi, Florian Wenzel, Zhiqiang Tang, Ding Zhao, Bo Li, Mu Li">
+
+    <title>Are Multimodal Models Robust to Image and Text Perturbations?</title>
+    <!-- Bootstrap core CSS -->
+    <!--link href="bootstrap.min.css" rel="stylesheet"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+    <!--    <link rel="icon" href="img/favicon.gif" type="image/gif">-->
+</head>
+
+<body>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container"></div>
+    <h2>Are Multimodal Models Robust to Image and Text Perturbations?</h2>
+    <hr>
+    <p class="authors">
+        <a href="href="https://www.cs.cmu.edu/~jielinq/">Jielin Qiu<sup>&#9824,&#9827</sup></a>,
+        <a href="href="https://bryanyzhu.github.io/">Yi Zhu<sup>&#9824</sup></a>,
+        <a href="https://sxjscience.github.io/">Xingjian Shi<sup>&#9824</sup></a>,
+        <a href="http://florianwenzel.com/">Florian Wenzel<sup>&#9824</sup></a>,
+        <a href="https://sites.google.com/site/zhiqiangtanghomepage">Zhiqiang Tang<sup>&#9824</sup></a>,
+        <a href="https://safeai-lab.github.io/">Ding Zhao<sup>&#9827</sup></a>,
+        <a href="https://aisecure.github.io/">Bo Li<sup>&#9824,&#9830</sup></a>,
+        <a href="http://www.cs.cmu.edu/~muli/">Mu Li<sup>&#9824</sup></a>
+    </p>
+    <p class="authors">
+        <sup>&#9824</sup>Amazon Web Services,
+        <sup>&#9827</sup>Carnegie Mellon University,
+        <sup>&#9830</sup>University of Illinois Urbana-Champaign
+    </p>
+    <div class="btn-group" role="group" aria-label="Top menu">
+        <a class="btn btn-primary" href="https://arxiv.org/abs/2212.08044">Paper</a>
+        <a class="btn btn-primary" href="https://mmrobustness.github.io/">Code [available soon]</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="section">
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/example.png" style="width:80%">
+            </div>
+        </div>
+        <p>
+            Multimodal models are sensitive to image/text perturbations (original image-text pairs are shown in blue boxes, perturbed ones are in red).
+            Image captioning (Top): Adding image perturbations can result in incorrect captions, e.g., the tabby kitten is mistakenly described as a woman/dog. 
+            Text-to-image generation (bottom): Applying text perturbations can result in the generated images containing incomplete visual information, e.g., the tree is missing in the example above.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Abstract</h2>
+        <hr>
+        <p>
+            Multimodal image-text models have shown remarkable performance in the past few years. 
+            However, evaluating their robustness against distribution shifts is crucial before adopting them in real-world applications.In this paper, we investigate the robustness of nine popular open-sourced image-text models under common perturbations on five tasks (image-text retrieval, visual reasoning, visual entailment, image captioning, and text-to-image generation).
+            In particular, we apply 17 image perturbation and 16 text perturbation techniques on top of existing datasets to serve as the testbed. 
+            We observe that multimodal models are sensitive to image and text perturbations, especially to image perturbations.
+            Our investigation also shows an interesting finding that character-level perturbations are the most effective attack for text, and zoom blur is the most effective one for images. 
+            We hope our extensive study could shed light on new directions for the development of large multimodal image-text models.
+        </p>
+    </div>
+
+    <br>
+
+    <div class="section">
+        <h2>Perturbation Strategies</h2>
+        <hr>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/image_method.png" style="width:100%">
+            </div>
+        </div>
+        <p>
+            For image perturbations, the perturbations are grouped into five categories: Noise, Blur, Weather, Digital, and Stylize. Specifically, we use 17 image perturbation techniques, (1) Noise: Gaussian noise, shot noise, impulse noise, speckle noise; (2) Blur: defocus blur, frosted glass blur, motion blur, zoom blur; (3) Weather: snow, frost, fog, brightness; (4) Digital: contrast, elastic, pixelate, JPEG compression; and (5) stylize.
+        </p>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/text_method.png" style="width:100%">
+            </div>
+        </div>
+        <p>
+            For text perturbations, we design 16 text perturbation techniques grouped into three categories: character-level, word-level, and sentence-level.   In detail, for character-level perturbations, we have keyboard, OCR, character insert (CI), character replace (CR), character swap (CS), character delete (CD). These perturbations can be considered as simulating real-world typos or mistakes during typing.
+            For word-level perturbations, we have synonym replacement (SR), word insertion (WR), word swap (WS), word deletion (WD), and insert punctuation (IP). These perturbations aim to simulate different writing habits that people may replace, delete, or add words to express the same meaning.
+            For sentence-level perturbation, we transfer the text style into formal, casual, passive, and active we adopt the back translation method.
+            These perturbations will focus more on language semantics, due to the differences in speaking/writing styles or translation errors.
+        <p>
+    </div>
+
+    <br>
+
+    <div class="section">
+        <h2>Image and Text Perturbation Examples</h2>
+
+        <div class="row justify-content-center text-center">
+            <div class="col">
+                <h5>Image Perturbation</h5>
+                <img src="images/image_example.png" style="width:60%">
+            </div>
+            <div class="col">
+                <h5>Text Perturbation</h5>
+                <img src="images/text_example.png" style="width:110%">
+            </div>
+            <hr>
+    </div>
+
+    <br>
+
+    <div class="section">
+        <h2>Evaluation Tasks, Datasets, Models and Metrics</h2>
+        <hr>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/evaluation.png" style="width:100%">
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+
+    <div class="section">
+        <h2>Image-text Retrieval Evaluation Results</h2>
+        <hr>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/itr_table.png" style="width:100%">
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="section">
+        <h2>Visual Reasoning Evaluation Results</h2>
+        <hr>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/VR_table.png" style="width:100%">
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="section">
+        <h2>Visual Entailment Evaluation Results</h2>
+        <hr>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/VE_table.png" style="width:100%">
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+
+    <div class="section">
+        <h2>Image Captioning Evaluation Results</h2>
+        <hr>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/captioning_result.png" style="width:100%">
+            </div>
+        </div>
+        <br>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/captioning_table.png" style="width:100%">
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+
+    <div class="section">
+        <h2>Text-to-Image Generation Evaluation Results</h2>
+        <hr>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/generation_result.png" style="width:100%">
+            </div>
+        </div>
+        <br>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/generation_table_SD.png" style="width:100%">
+            </div>
+        </div>
+        <br>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/generation_table_GLIDE.png" style="width:100%">
+            </div>
+        </div>
+        <br>
+        <div class="col justify-content-center text-center">
+            <div class="col-sm-12">
+                <img src="images/detection.png" style="width:100%">
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+
+    <div class="section">
+        <h2>Bibtex</h2>
+        <hr>
+        <div class="bibtexsection">
+            @inproceedings{Qiu2022AreMM,
+                title={Are Multimodal Models Robust to Image and Text Perturbations?},
+                author={Jielin Qiu and Yi Zhu and Xingjian Shi and Florian Wenzel and 
+                Zhiqiang Tang and Ding Zhao and Bo Li and Mu Li},
+                journal={arXiv preprint arXiv:2212.08044},
+                year={2022}
+        </div>
+    </div>
+
+    <hr>
+
+    <footer>
+        <p>
+            Acknowledgement: This page is modified from <a href="https://yilundu.github.io/">Yilun Du</a>.
+        </p>
+    </footer>
+
+
+
+
+    
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
