@@ -1,4 +1,4 @@
 ## <b>Webpage</b>
 
 
-This is the project page for paper "MultiSum: A Dataset for Multimodal Summarization and Thumbnail Generation of Videos".
+This is the project page for paper "Evaluating Durability: Benchmark Insights into Multimodal Watermarking".
